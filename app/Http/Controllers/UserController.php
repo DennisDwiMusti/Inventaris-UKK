@@ -21,7 +21,7 @@ class UserController extends Controller
 
         $users = $query->latest()->get();
 
-        return view('dashboard', compact('users'));
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -40,7 +40,7 @@ class UserController extends Controller
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
-            'role'     => 'required|in:admin,staf',
+            'role'     => 'required|in:admin,operator',
             'password' => 'required|string|min:4',
         ]);
 
@@ -79,7 +79,7 @@ class UserController extends Controller
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'role'     => 'required|in:admin,staf',
+            'role'     => 'required|in:admin,operator',
             'password' => 'nullable|string|min:4',
         ]);
 

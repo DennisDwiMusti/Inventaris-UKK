@@ -392,7 +392,7 @@
                         <a href="{{ route('users.index', ['role' => 'admin']) }}" class="{{ request('role') == 'admin' ? 'active' : '' }}">Admin</a>
                     </li>
                     <li class="dropdown-item">
-                        <a href="{{ route('users.index', ['role' => 'staf']) }}" class="{{ request('role') == 'staf' ? 'active' : '' }}">Operator</a>
+                        <a href="{{ route('users.index', ['role' => 'operator']) }}" class="{{ request('role') == 'operator' ? 'active' : '' }}">Operator</a>
                     </li>
                 </ul>
             </li>
