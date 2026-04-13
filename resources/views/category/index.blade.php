@@ -34,7 +34,7 @@
                     <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #f1f5f9; width: 5%;">No</th>
                     <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #f1f5f9;">Nama Kategori</th>
                     <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #f1f5f9;">Divisi PJ</th>
-                    <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #f1f5f9;">Jumlah Item</th>
+                    <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #f1f5f9;">Tipe</th>
                     <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #f1f5f9; text-align: center;">Tindakan</th>
                 </tr>
             </thead>
