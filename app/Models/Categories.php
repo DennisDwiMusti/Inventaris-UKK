@@ -12,7 +12,7 @@ class Categories extends Model
     protected $fillable = [
         'name',
         'division',
-        'total-items',
+        'total_items',
     ];
 
     public function items()

@@ -21,4 +21,9 @@ class Item extends Model
     {
         return $this->belongsTo(Categories::class, 'category_id');
     }
+
+    public function lendings()
+    {
+        return $this->hasMany(Lending::class, 'item_id');
+    }
 }

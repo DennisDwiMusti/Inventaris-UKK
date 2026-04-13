@@ -7,12 +7,13 @@
         <title>Inventory Management - SMK Wikrama</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:300,400,500,600,800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=figtree:300,400,500,600,700,800&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
         <style>
             :root {
-                --primary-blue: #3b82f6;
-                --primary-hover: #2563eb;
+                --primary: #4f46e5; /* Indigo 600 */
+                --primary-hover: #4338ca;
                 --text-dark: #0f172a;
                 --text-muted: #64748b;
                 --bg-light: #f8fafc;
@@ -20,7 +21,7 @@
 
             body {
                 font-family: 'Figtree', sans-serif;
-                background-color: #ffffff;
+                background-color: var(--bg-light);
                 margin: 0;
                 padding: 0;
                 color: var(--text-dark);
@@ -30,402 +31,374 @@
             .container {
                 max-width: 1200px;
                 margin: 0 auto;
-                padding: 0 20px;
+                padding: 0 24px;
             }
 
+            /* Navbar */
             .header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 15px 0;
+                padding: 20px 0;
+                background-color: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(12px);
                 position: sticky;
                 top: 0;
-                background-color: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                z-index: 900;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-                transition: all 0.3s ease;
+                z-index: 1000;
+                border-bottom: 1px solid #e2e8f0;
             }
 
-            .header-left, .header-right {
+            .header-content {
                 display: flex;
+                justify-content: space-between;
                 align-items: center;
             }
 
             .header-logo {
-                height: 50px;
-                width: auto;
+                height: 45px;
                 transition: transform 0.3s ease;
             }
 
-            .header-logo:hover {
-                transform: scale(1.05);
-            }
-
             .login-btn {
-                background-color: #2196f3;
+                background-color: var(--primary);
                 color: white;
-                padding: 10px 28px;
+                padding: 10px 24px;
                 text-decoration: none;
-                border-radius: 4px;
-                font-weight: 500;
-                transition: all 0.3s ease;
-                cursor: pointer;
+                border-radius: 10px;
+                font-weight: 600;
+                transition: all 0.2s;
                 border: none;
-                font-size: 1rem;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
             }
 
             .login-btn:hover {
-                background-color: #1976d2;
+                background-color: var(--primary-hover);
+                transform: translateY(-1px);
             }
 
-            .main-section {
+            /* Main Hero */
+            .hero-section {
+                padding: 80px 0 60px;
                 text-align: center;
-                padding: 80px 0 40px;
             }
 
             .main-title {
-                font-size: 3rem;
+                font-size: 3.5rem;
                 font-weight: 800;
                 color: var(--text-dark);
-                margin-bottom: 10px;
-                line-height: 1.2;
+                line-height: 1.1;
+                margin-bottom: 20px;
+                letter-spacing: -0.025em;
+            }
+
+            .main-title span {
+                color: var(--primary);
             }
 
             .main-subtitle {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 color: var(--text-muted);
-                max-width: 600px;
-                margin: 0 auto 40px auto;
-                font-weight: 400;
+                max-width: 650px;
+                margin: 0 auto 50px;
+            }
+
+            .hero-image-container {
+                background: white;
+                padding: 15px;
+                border-radius: 24px;
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+                max-width: 850px;
+                margin: 0 auto;
+                border: 1px solid #e2e8f0;
             }
 
             .main-image {
                 width: 100%;
-                max-width: 750px;
-                height: auto;
+                border-radius: 16px;
                 display: block;
-                margin: 0 auto;
             }
 
+            /* Workflow Cards */
             .workflow-section {
+                padding: 100px 0;
                 text-align: center;
-                padding: 60px 0 80px;
             }
 
-            .workflow-title {
-                font-size: 2.5rem;
-                font-weight: 600;
-                color: var(--text-dark);
-                margin-bottom: 5px;
-            }
-
-            .workflow-subtitle {
-                font-size: 1.1rem;
-                color: var(--text-muted);
-                margin-bottom: 50px;
+            .section-tag {
+                color: var(--primary);
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+                letter-spacing: 0.1em;
             }
 
             .workflow-grid {
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 25px;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 24px;
+                margin-top: 50px;
             }
 
-            .grid-item {
-                text-align: center;
+            .workflow-card {
+                background: white;
+                padding: 32px;
+                border-radius: 20px;
+                border: 1px solid #e2e8f0;
+                transition: all 0.3s ease;
+            }
+
+            .workflow-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+                border-color: var(--primary);
+            }
+
+            .card-icon {
+                width: 64px;
+                height: 64px;
+                background: #f5f3ff;
+                border-radius: 16px;
                 display: flex;
-                flex-direction: column;
                 align-items: center;
-            }
-
-            .panel {
-                aspect-ratio: 1 / 1;
-                width: 100%;
-                display: flex;
                 justify-content: center;
-                align-items: center;
-                margin-bottom: 20px;
-                overflow: hidden;
+                margin: 0 auto 20px;
+                color: var(--primary);
+                font-size: 1.5rem;
             }
 
-            .panel img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .panel-text {
+            .card-title {
+                font-weight: 700;
                 font-size: 1.15rem;
-                font-weight: 500;
-                color: var(--text-dark);
-                margin: 0;
-            }
-            .footer-wrapper {
-                background-color: #fcfcfc;
-                border-top: 1px solid #f0f0f0;
-                padding: 50px 0 30px 0;
+                margin-bottom: 10px;
             }
 
-            .footer {
+            /* Footer */
+            .footer-wrapper {
+                background-color: white;
+                border-top: 1px solid #e2e8f0;
+                padding: 60px 0 40px;
+            }
+
+            .footer-grid {
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-columns: 2fr 1fr 1fr;
                 gap: 40px;
             }
 
-            .footer-col {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .footer-logo {
-                width: 70px;
-                height: auto;
-                margin-bottom: 15px;
-            }
-
-            .footer-col p {
-                color: var(--text-muted);
-                margin: 4px 0;
-                font-size: 1rem;
-            }
-
             .footer-col h3 {
-                font-size: 1.2rem;
-                color: var(--text-dark);
-                margin-top: 0;
+                font-size: 1rem;
+                font-weight: 700;
                 margin-bottom: 20px;
-                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
             }
 
             .footer-links {
                 list-style: none;
                 padding: 0;
-                margin: 0;
             }
 
-            .footer-links li {
-                margin-bottom: 12px;
-            }
-
+            .footer-links li { margin-bottom: 12px; }
             .footer-links a {
                 text-decoration: none;
                 color: var(--text-muted);
-                font-size: 1rem;
+                transition: color 0.2s;
             }
 
-            .footer-links a.highlight-red {
-                color: #dc2626;
-            }
+            .footer-links a:hover { color: var(--primary); }
 
+            /* Modal Styling */
             .modal-overlay {
                 display: none;
                 position: fixed;
-                z-index: 9999;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
+                inset: 0;
+                background: rgba(15, 23, 42, 0.6);
+                backdrop-filter: blur(4px);
+                z-index: 2000;
                 align-items: center;
                 justify-content: center;
-                animation: fadeIn 0.3s ease;
             }
 
             .modal-content {
-                background-color: #fff;
+                background: white;
                 padding: 40px;
-                border-radius: 8px;
+                border-radius: 24px;
                 width: 100%;
-                max-width: 450px;
-                box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-                animation: slideDown 0.3s ease;
+                max-width: 420px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                position: relative;
             }
 
             .modal-title {
+                font-size: 1.75rem;
+                font-weight: 800;
                 text-align: center;
-                font-size: 2rem;
-                font-weight: 600;
-                margin-top: 0;
-                margin-bottom: 30px;
-                color: #1a1a1a;
+                margin-bottom: 8px;
             }
 
-            .form-group {
-                margin-bottom: 20px;
-                text-align: left;
-            }
-
+            .form-group { margin-bottom: 20px; }
             .form-group label {
                 display: block;
-                font-size: 1rem;
-                color: #333;
+                font-weight: 600;
+                font-size: 0.9rem;
                 margin-bottom: 8px;
-                font-weight: 500;
+                color: var(--text-dark);
             }
 
             .form-group input {
                 width: 100%;
-                padding: 12px 15px;
-                font-size: 0.95rem;
-                border: 1px solid #e4e4e7;
-                border-radius: 4px;
-                background-color: #fafafa;
-                box-sizing: border-box;
+                padding: 12px 16px;
+                border-radius: 12px;
+                border: 1px solid #e2e8f0;
+                background: #f8fafc;
+                font-size: 1rem;
+                outline: none;
+                transition: all 0.2s;
             }
 
             .form-group input:focus {
-                outline: none;
-                border-color: #4bdba3;
-                box-shadow: 0 0 0 2px rgba(75, 219, 163, 0.2);
+                border-color: var(--primary);
+                background: white;
+                box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
             }
 
             .modal-actions {
-                display: flex;
-                gap: 15px;
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                gap: 12px;
                 margin-top: 30px;
             }
 
-            .modal-btn {
-                padding: 10px 24px;
-                border: none;
-                border-radius: 4px;
-                font-size: 1rem;
-                font-weight: 500;
-                cursor: pointer;
-                transition: opacity 0.2s;
+            .btn-submit {
+                background: var(--primary);
                 color: white;
-            }
-
-            .modal-btn:hover {
-                opacity: 0.9;
+                border: none;
+                padding: 12px;
+                border-radius: 12px;
+                font-weight: 700;
+                cursor: pointer;
             }
 
             .btn-close {
-                background-color: #ff7849;
+                background: #f1f5f9;
+                color: var(--text-muted);
+                border: none;
+                padding: 12px;
+                border-radius: 12px;
+                font-weight: 600;
+                cursor: pointer;
             }
 
-            .btn-submit {
-                background-color: #4bdba3;
-            }
-
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-
-            @keyframes slideDown {
-                from { transform: translateY(-30px); opacity: 0; }
+            @keyframes slideUp {
+                from { transform: translateY(20px); opacity: 0; }
                 to { transform: translateY(0); opacity: 1; }
             }
+
+            .modal-content { animation: slideUp 0.3s ease-out; }
         </style>
     </head>
     <body>
-        <div class="container">
-            <header class="header">
-                <div class="header-left">
-                    <img src="{{ asset('assets/images/wikrama-logo.png') }}" alt="Logo SMK Wikrama" class="header-logo">
-                </div>
-                <div class="header-right">
-                    <button class="login-btn" id="openLoginBtn">Login</button>
-                </div>
-            </header>
+        <header class="header">
+            <div class="container header-content">
+                <img src="{{ asset('assets/images/wikrama-logo.png') }}" alt="Logo SMK Wikrama" class="header-logo" onerror="this.style.display='none'">
+                <button class="login-btn" id="openLoginBtn">
+                    <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i> Masuk ke Sistem
+                </button>
+            </div>
+        </header>
 
-            <section class="main-section">
-                <h1 class="main-title">Inventory Management of<br>SMK Wikrama</h1>
-                <p class="main-subtitle">Management of incoming and outgoing items at SMK Wikrama Bogor.</p>
-                <img src="{{ asset('assets/images/main-image.png') }}" alt="Main Inventory Illustration" class="main-image">
+        <main>
+            <section class="hero-section">
+                <div class="container">
+                    <h1 class="main-title">Inventory System<br><span>SMK Wikrama Bogor</span></h1>
+                    <p class="main-subtitle">Solusi cerdas manajemen aset dan inventaris sekolah yang terintegrasi, cepat, dan transparan.</p>
+                    <div class="hero-image-container">
+                        <img src="{{ asset('assets/images/main-image.png') }}" alt="Dashboard Preview" class="main-image" onerror="this.src='https://placehold.co/800x450/4f46e5/ffffff?text=Inventory+System+Preview'">
+                    </div>
+                </div>
             </section>
 
             <section class="workflow-section">
-                <h2 class="workflow-title">Our system flow</h2>
-                <p class="workflow-subtitle">Our inventory system workflow</p>
+                <div class="container">
+                    <span class="section-tag">Fitur Utama</span>
+                    <h2 style="font-size: 2.25rem; font-weight: 800; margin-top: 10px;">Alur Kerja Sistem Kami</h2>
 
-                <div class="workflow-grid">
-                    <div class="grid-item">
-                        <div class="panel">
-                            <img src="{{ asset('assets/images/item-data.png') }}" alt="Items Data Icon">
+                    <div class="workflow-grid">
+                        <div class="workflow-card">
+                            <div class="card-icon"><i class="fas fa-database"></i></div>
+                            <h3 class="card-title">Manajemen Data</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Input dan kelola ribuan data barang dengan kategori yang terorganisir.</p>
                         </div>
-                        <p class="panel-text">Items Data</p>
-                    </div>
-
-                    <div class="grid-item">
-                        <div class="panel">
-                            <img src="{{ asset('assets/images/technician.png') }}" alt="Management Technician Icon">
+                        <div class="workflow-card">
+                            <div class="card-icon"><i class="fas fa-tools"></i></div>
+                            <h3 class="card-title">Perbaikan Barang</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Pantau status kerusakan dan proses perbaikan barang secara real-time.</p>
                         </div>
-                        <p class="panel-text">Management Technician</p>
-                    </div>
-
-                    <div class="grid-item">
-                        <div class="panel">
-                            <img src="{{ asset('assets/images/management.png') }}" alt="Managed Lending Icon">
+                        <div class="workflow-card">
+                            <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
+                            <h3 class="card-title">Peminjaman Aset</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Sistem peminjaman yang aman bagi guru, staf, dan siswa.</p>
                         </div>
-                        <p class="panel-text">Managed Lending</p>
-                    </div>
-
-                    <div class="grid-item">
-                        <div class="panel">
-                            <img src="{{ asset('assets/images/area.png') }}" alt="All Can Borrow Icon">
+                        <div class="workflow-card">
+                            <div class="card-icon"><i class="fas fa-file-export"></i></div>
+                            <h3 class="card-title">Laporan Excel</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Ekspor data inventaris ke format Excel hanya dengan satu klik.</p>
                         </div>
-                        <p class="panel-text">All Can Borrow</p>
                     </div>
                 </div>
             </section>
-        </div>
+        </main>
 
-        <div class="footer-wrapper">
-            <div class="container">
-                <footer class="footer">
-                    <div class="footer-col">
-                        <img src="{{ asset('assets/images/wikrama-logo.png') }}" alt="Logo SMK Wikrama" class="footer-logo">
-                        <p>smkwikrama@sch.id</p>
-                        <p>001-7876-2876</p>
-                    </div>
-                    <div class="footer-col">
-                        <h3>Our Guidelines</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Terms</a></li>
-                            <li><a href="#" class="highlight-red">Privacy policy</a></li>
-                            <li><a href="#">Cookie Policy</a></li>
-                            <li><a href="#">Discover</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h3>Our address</h3>
-                        <p>Jalan Wangun Tengah</p>
-                        <p>Sindangsari</p>
-                        <p>Jawa Barat</p>
-                    </div>
-                </footer>
+        <footer class="footer-wrapper">
+            <div class="container footer-grid">
+                <div class="footer-col">
+                    <img src="{{ asset('assets/images/wikrama-logo.png') }}" alt="Logo" style="height: 50px; margin-bottom: 20px;">
+                    <p style="font-weight: 700; color: var(--text-dark); margin-bottom: 5px;">SMK WIKRAMA BOGOR</p>
+                    <p>smkwikrama@sch.id</p>
+                    <p>(0251) 8242411</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Tautan Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Panduan Sistem</a></li>
+                        <li><a href="#" style="color: #ef4444; font-weight: 600;">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Lokasi</h3>
+                    <p>Jl. Raya Wangun<br>Kel. Sindangsari<br>Bogor Timur, Jawa Barat</p>
+                </div>
             </div>
-        </div>
+            <div class="container" style="margin-top: 50px; text-align: center; color: #94a3b8; font-size: 0.85rem;">
+                &copy; 2026 SMK Wikrama Bogor. All rights reserved.
+            </div>
+        </footer>
 
         <div id="loginModal" class="modal-overlay">
             <div class="modal-content">
-                <h2 class="modal-title">Login</h2>
+                <h2 class="modal-title">Selamat Datang</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Silakan login untuk mengelola sistem</p>
+
                 <form action="{{ route('login.post') }}" method="POST">
                     @csrf
+                    <div class="form-group">
+                        <label>Alamat Email</label>
+                        <input type="email" name="email" value="{{ old('email') }}" placeholder="admin@gmail.com" required autofocus>
+                    </div>
 
-                    @error('email')
-                        <div style="color: #ef4444; margin-bottom: 15px; font-size: 0.9rem; text-align: center;">
-                            {{ $message }}
+                    <div class="form-group">
+                        <label>Password Akun</label>
+                        <input type="password" name="password" placeholder="••••••••" required>
+                    </div>
+
+                    @if($errors->any())
+                        <div style="background: #fef2f2; color: #ef4444; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 0.85rem; font-weight: 600; text-align: center; border: 1px solid #fee2e2;">
+                            <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i> Email atau password salah!
                         </div>
-                    @enderror
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Email" required autocomplete="email" autofocus>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password">
-                    </div>
+                    @endif
 
                     <div class="modal-actions">
-                        <button type="button" class="modal-btn btn-close" id="closeModalBtn">Close</button>
-                        <button type="submit" class="modal-btn btn-submit">Submit</button>
+                        <button type="button" class="btn-close" id="closeModalBtn">Batal</button>
+                        <button type="submit" class="btn-submit">Masuk Sekarang</button>
                     </div>
                 </form>
             </div>
@@ -433,38 +406,19 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Tangkap elemen-elemen yang dibutuhkan
                 const openBtn = document.getElementById('openLoginBtn');
                 const closeBtn = document.getElementById('closeModalBtn');
                 const modal = document.getElementById('loginModal');
 
-                // Pastikan tombol Login ada sebelum menambahkan event (mencegah JS error)
-                if (openBtn) {
-                    openBtn.addEventListener('click', function(e) {
-                        e.preventDefault(); // Mencegah aksi default
-                        modal.style.display = 'flex';
-                    });
-                }
+                if (openBtn) openBtn.onclick = () => modal.style.display = 'flex';
+                if (closeBtn) closeBtn.onclick = () => modal.style.display = 'none';
 
-                // Pastikan tombol Close ada
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', function() {
-                        modal.style.display = 'none';
-                    });
-                }
+                window.onclick = (e) => {
+                    if (e.target === modal) modal.style.display = 'none';
+                };
 
-                // Menutup modal jika area gelap di luar kotak form diklik
-                window.addEventListener('click', function(e) {
-                    if (e.target === modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-
-                // Membuka modal secara otomatis JIKA ada error validasi dari Laravel
                 @if($errors->any())
-                    if (modal) {
-                        modal.style.display = 'flex';
-                    }
+                    modal.style.display = 'flex';
                 @endif
             });
         </script>

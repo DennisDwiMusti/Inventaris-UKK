@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
@@ -16,13 +13,10 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->enum('division', ['Sarpras', 'Tata Usaha', 'Tefa']);
-            $table->integer('total-items');
+            $table->integer('total_items');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('categories');

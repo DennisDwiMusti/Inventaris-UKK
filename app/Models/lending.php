@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class lending extends Model
+class Lending extends Model
 {
     use HasFactory;
 
@@ -13,9 +13,17 @@ class lending extends Model
         'item_id',
         'user_id',
         'name',
-        'total-item',
+        'total_items',
         'keterangan',
         'date',
         'return_date',
     ];
+
+    public function item() {
+        return $this->belongsTo(Item::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

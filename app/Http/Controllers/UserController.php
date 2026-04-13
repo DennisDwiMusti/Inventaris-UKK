@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -41,18 +43,28 @@ class UserController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
             'role'     => 'required|in:admin,operator',
-            'password' => 'required|string|min:4',
+        ], [
+            'name.required'  => 'The name field is required.',
+            'email.required' => 'The email field is required.',
+            'role.required'  => 'The role field is required.',
         ]);
 
-        User::create([
+        $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
             'role'     => $request->role,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make('temp_password'),
+        ]);
+
+        $emailPrefix = substr($request->email, 0, 4);
+        $generatedPassword = $emailPrefix . $user->id;
+
+        $user->update([
+            'password' => Hash::make($generatedPassword)
         ]);
 
         return redirect()->route('users.index', ['role' => $request->role])
-                         ->with('success', 'Berhasil menambahkan user baru!');
+                         ->with('success', 'Berhasil menambahkan user baru! Password akun ini: ' . $generatedPassword);
     }
 
     /**
@@ -79,14 +91,12 @@ class UserController extends Controller
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'role'     => 'required|in:admin,operator',
             'password' => 'nullable|string|min:4',
         ]);
 
         $data = [
             'name'  => $request->name,
             'email' => $request->email,
-            'role'  => $request->role,
         ];
 
         if ($request->filled('password')) {
@@ -94,9 +104,33 @@ class UserController extends Controller
         }
 
         $user->update($data);
-
+        if (auth()->user()->role == 'operator') {
+            return redirect()->back()->with('success', 'Profil Anda berhasil diperbarui!');
+        }
         return redirect()->route('users.index', ['role' => $user->role])
                          ->with('success', 'Data user berhasil diperbarui!');
+    }
+
+    public function export(Request $request)
+    {
+        $role = $request->role ?? 'admin';
+
+        $fileName = $role . '-accounts.xlsx';
+
+        return Excel::download(new UserExport($role), $fileName);
+    }
+
+    public function resetPassword(User $user)
+    {
+        $emailPrefix = substr($user->email, 0, 4);
+        $generatedPassword = $emailPrefix . $user->id;
+
+        $user->update([
+            'password' => Hash::make($generatedPassword)
+        ]);
+
+        return redirect()->route('users.index', ['role' => 'operator'])
+                         ->with('success', 'Berhasil mereset password! Password baru akun ini adalah: ' . $generatedPassword);
     }
 
     /**

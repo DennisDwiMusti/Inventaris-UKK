@@ -6,27 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('lendings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->bigInteger('item_id');
-            $table->bigInteger('user_id');
+            $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
-            $table->integer('total_item');
+            $table->integer('total_items');
             $table->datetime('date');
-            $table->datetime('return_date');
+            $table->datetime('return_date')->nullable();
             $table->string('keterangan');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('lendings');
