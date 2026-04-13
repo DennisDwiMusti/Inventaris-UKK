@@ -19,28 +19,26 @@ class CategoriesController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'division' => 'required|in:Sarpras,Tata Usaha,Tefa'
-    ], [
-        'name.required' => 'The name field is required.',
-        'division.required' => 'The division pj field is required.'
-    ]);
-
-    Categories::create([
-        'name' => $request->name,
-        'division' => $request->division,
-        'total_items' => 0,
-    ]);
-
-    return redirect()->route('categories.index')->with('success', 'Category added successfully!');
-}
-
-    public function show(Categories $categories)
     {
-        //
+        $request->validate([
+            // unique:nama_tabel,nama_kolom
+            'name' => 'required|string|max:255|unique:categories,name',
+            'division' => 'required|in:Sarpras,Tata Usaha,Tefa'
+        ], [
+            'name.required' => 'Nama kategori wajib diisi.',
+            'name.unique' => 'Nama kategori ini sudah ada, gunakan nama lain.',
+            'division.required' => 'Divisi wajib dipilih.'
+        ]);
+
+        Categories::create([
+            'name' => $request->name,
+            'division' => $request->division,
+            'total_items' => 0,
+        ]);
+
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil ditambahkan!');
     }
+
     public function edit(Categories $category)
     {
         return view('category.edit', compact('category'));
@@ -49,11 +47,13 @@ class CategoriesController extends Controller
     public function update(Request $request, Categories $category)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            // unique:nama_tabel,nama_kolom,kecualikan_id
+            'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
             'division' => 'required|in:Sarpras,Tata Usaha,Tefa'
         ], [
-            'name.required' => 'The name field is required.',
-            'division.required' => 'The division pj field is required.'
+            'name.required' => 'Nama kategori wajib diisi.',
+            'name.unique' => 'Nama kategori ini sudah ada.',
+            'division.required' => 'Divisi wajib dipilih.'
         ]);
 
         $category->update([
@@ -61,12 +61,12 @@ class CategoriesController extends Controller
             'division' => $request->division,
         ]);
 
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil diperbarui!');
     }
 
     public function destroy(Categories $category)
     {
         $category->delete();
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully!');
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus!');
     }
 }
