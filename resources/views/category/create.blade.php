@@ -2,6 +2,12 @@
 
 @section('content')
 <div style="padding: 24px; max-width: 800px; margin: 0 auto; font-family: 'Inter', sans-serif;">
+    @if($errors->any())
+            <div style="background-color: #fee2e2; color: #b91c1c; padding: 16px 20px; border-radius: 10px; margin-bottom: 24px; border: 1px solid #fecaca; font-weight: 500;">
+                <i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>
+                Please check the form for duplicate data or missing values.
+            </div>
+    @endif
     <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0;">
 
         <div style="margin-bottom: 32px;">

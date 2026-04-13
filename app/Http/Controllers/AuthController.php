@@ -17,21 +17,22 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('users');
+            // Setelah sukses login, ARAHKAN KE DASHBOARD
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password yang Anda masukkan salah.',
-        ])->onlyInput('email');
+            'email' => 'Email atau password salah.',
+        ]);
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        // Setelah logout, arahkan kembali ke halaman Welcome/Login
+        return redirect()->route('welcome');
     }
 }

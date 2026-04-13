@@ -19,23 +19,23 @@ class CategoriesController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'division' => 'required|in:Sarpras,Tata Usaha,Tefa'
-        ], [
-            'name.required' => 'The name field is required.',
-            'division.required' => 'The division pj field is required.'
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'division' => 'required|in:Sarpras,Tata Usaha,Tefa'
+    ], [
+        'name.required' => 'The name field is required.',
+        'division.required' => 'The division pj field is required.'
+    ]);
 
-        Categories::create([
-            'name' => $request->name,
-            'division' => $request->division,
-            'total-items' => 0,
-        ]);
+    Categories::create([
+        'name' => $request->name,
+        'division' => $request->division,
+        'total_items' => 0,
+    ]);
 
-        return redirect()->route('categories.index')->with('success', 'Category added successfully!');
-    }
+    return redirect()->route('categories.index')->with('success', 'Category added successfully!');
+}
 
     public function show(Categories $categories)
     {

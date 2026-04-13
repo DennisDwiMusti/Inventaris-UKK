@@ -27,10 +27,12 @@
                 <i class="fas fa-file-excel" style="color: #16a34a;"></i> Export Excel
             </a>
 
+            @if(Auth::user()->role == 'admin')
             <a href="{{ route('items.create') }}"
                style="background-color: #4f46e5; color: white; text-decoration: none; padding: 10px 22px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); transition: all 0.2s;">
                 <i class="fas fa-plus"></i> Tambah Barang
             </a>
+            @endif
         </div>
     </div>
 
@@ -43,11 +45,12 @@
                     <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; border-bottom: 2px solid #f1f5f9;">Name</th>
                     <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; text-align: center;">Total</th>
 
+                    {{-- Kolom Rusak ditampilkan untuk kedua role --}}
+                    <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; text-align: center;">Rusak</th>
+
                     @if(Auth::user()->role == 'admin')
-                        <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; text-align: center;">Rusak</th>
                         <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; text-align: center;">Peminjaman</th>
                         <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; text-align: center;">Aksi</th>
-
                     @else
                         <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; text-align: center;">Available</th>
                         <th style="padding: 18px 24px; font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; text-align: center;">Lending Total</th>
@@ -68,14 +71,16 @@
                         </td>
                         <td style="padding: 20px 24px; text-align: center; font-weight: 700; color: #4f46e5;">{{ $item->total }}</td>
 
+                        {{-- Isi Kolom Rusak --}}
+                        <td style="padding: 20px 24px; text-align: center;">
+                            @if($item->repair > 0)
+                                <span style="color: #ef4444; font-weight: 700;">{{ $item->repair }}</span>
+                            @else
+                                <span style="color: #cbd5e1;">-</span>
+                            @endif
+                        </td>
+
                         @if(Auth::user()->role == 'admin')
-                            <td style="padding: 20px 24px; text-align: center;">
-                                @if($item->repair > 0)
-                                    <span style="color: #ef4444; font-weight: 700;">{{ $item->repair }}</span>
-                                @else
-                                    <span style="color: #cbd5e1;">-</span>
-                                @endif
-                            </td>
                             <td style="padding: 20px 24px; text-align: center;">
                                 @if($item->lending_id > 0)
                                     <a href="{{ route('lendings.index', ['filter_item' => $item->id]) }}"
@@ -108,7 +113,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" style="padding: 60px; text-align: center; color: #94a3b8;">Belum ada data barang.</td>
+                        <td colspan="{{ Auth::user()->role == 'admin' ? 7 : 6 }}" style="padding: 60px; text-align: center; color: #94a3b8;">Belum ada data barang.</td>
                     </tr>
                 @endforelse
             </tbody>

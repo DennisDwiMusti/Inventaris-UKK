@@ -161,11 +161,12 @@
         }
 
         .welcome-logo {
-            width: 70;
+            width: 70px;
             height: 70px;
             border-radius: 12px;
             padding: 5px;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+            background: white;
         }
 
         .welcome-text h2 {
@@ -236,6 +237,7 @@
             font-size: 0.8rem;
         }
 
+        /* --- KEMBALI KE DESAIN DROPDOWN LOGOUT ASLI --- */
         .user-dropdown-menu {
             display: none;
             position: absolute;
@@ -246,8 +248,9 @@
             border-radius: 12px;
             width: 180px;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            margin-top: 8px;
+            margin-top: 10px;
             overflow: hidden;
+            z-index: 9999;
         }
 
         .user-dropdown-menu.show { display: block; }
@@ -261,9 +264,13 @@
             color: var(--danger);
             font-size: 0.9rem;
             font-weight: 600;
+            transition: all 0.2s;
         }
 
-        .user-dropdown-item:hover { background: var(--danger-hover); }
+        .user-dropdown-item:hover {
+            background: var(--danger-hover);
+        }
+        /* ---------------------------------------------- */
 
         .content-area {
             padding: 40px 48px;

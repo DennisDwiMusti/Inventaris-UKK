@@ -23,9 +23,9 @@ class LendingSeeder extends Seeder
                 'item_id'     => $item->id,
                 'user_id'     => $user->id,
                 'name'        => 'Pak Acep',
-                'total_items' => 30,
+                'total_items' => 23,
                 'keterangan'  => 'Untuk ulangan harian kelas XII',
-                'date'        => Carbon::now(),
+                'date'        => Carbon::now()->subDays(3),
             ]);
 
             Lending::create([
@@ -34,7 +34,8 @@ class LendingSeeder extends Seeder
                 'name'        => 'Bu Tri',
                 'total_items' => 5,
                 'keterangan'  => 'Rapat guru di aula',
-                'date'        => Carbon::now()->subDays(2),
+                'date'        => Carbon::now()->subDays(8),
+                'return_date' => Carbon::now()->subDay(),
             ]);
         }
     }

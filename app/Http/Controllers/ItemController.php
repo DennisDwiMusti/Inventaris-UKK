@@ -40,7 +40,7 @@ class ItemController extends Controller
             'category_id' => $request->category_id,
             'total' => $request->total,
             'repair' => 0,
-            'lending_id' => 1,
+            'lending_id' => 0,
         ]);
 
         return redirect()->route('items.index')->with('success', 'Item added successfully!');
