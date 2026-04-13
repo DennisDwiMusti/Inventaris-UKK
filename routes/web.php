@@ -17,7 +17,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+Route::get('/items/export', [ItemController::class, 'export'])->name('items.export');
 Route::resource('categories', CategoriesController::class);
-
 Route::resource('users', UserController::class);
 Route::resource('items', ItemController::class);

@@ -8,14 +8,14 @@
         Please <span style="color: #db2777;">.fill-all</span> input form with right value.
     </p>
 
-    <form action="{{ route('categories.update', $categories->id) }}" method="POST">
+    <form action="{{ route('categories.update', $category->id) }}" method="POST">
         @csrf
         @method('PUT')
 
         <div style="margin-bottom: 24px;">
             <label style="display: block; color: #0f172a; font-size: 1rem; margin-bottom: 10px;">Name</label>
             <div style="position: relative;">
-                <input type="text" name="name" value="{{ old('name', $categories->name) }}" placeholder="Alat Dapur"
+                <input type="text" name="name" value="{{ old('name', $category->name) }}" placeholder="Alat Dapur"
                        style="width: 100%; padding: 14px 16px; font-size: 0.95rem; border-radius: 4px; outline: none; transition: all 0.2s;
                               border: 1px solid {{ $errors->has('name') ? '#ef4444' : '#e2e8f0' }};
                               color: {{ $errors->has('name') ? '#ef4444' : '#333' }};">
@@ -39,9 +39,9 @@
                 <div style="position: relative; flex-grow: 1;">
                     <select name="division" style="width: 100%; padding: 14px 16px; font-size: 0.95rem; border: none; outline: none; appearance: none; background: transparent; cursor: pointer; color: {{ $errors->has('division') ? '#ef4444' : '#333' }};">
                         <option value="" disabled>Select Division PJ</option>
-                        <option value="Sarpras" {{ old('division', $categories->division) == 'Sarpras' ? 'selected' : '' }}>Sarpras</option>
-                        <option value="Tata Usaha" {{ old('division', $categories->division) == 'Tata Usaha' ? 'selected' : '' }}>Tata Usaha</option>
-                        <option value="Tefa" {{ old('division', $categories->division) == 'Tefa' ? 'selected' : '' }}>Tefa</option>
+                        <option value="Sarpras" {{ old('division', $category->division) == 'Sarpras' ? 'selected' : '' }}>Sarpras</option>
+                        <option value="Tata Usaha" {{ old('division', $category->division) == 'Tata Usaha' ? 'selected' : '' }}>Tata Usaha</option>
+                        <option value="Tefa" {{ old('division', $category->division) == 'Tefa' ? 'selected' : '' }}>Tefa</option>
                     </select>
 
                     @error('division')

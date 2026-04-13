@@ -198,8 +198,6 @@
             padding: 4px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             object-fit: contain;
-            background-color: var(--surface-white);
-            border: 2px solid rgba(255, 255, 255, 0.9);
         }
 
         .welcome-text h2 {
@@ -354,7 +352,7 @@
         <ul class="sidebar-menu">
             <div class="menu-section">Menu</div>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="{{ route('dashboard') }}" class="sidebar-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
                     <i class="fas fa-th-large"></i>
                     <span>Dashboard</span>
                 </a>
